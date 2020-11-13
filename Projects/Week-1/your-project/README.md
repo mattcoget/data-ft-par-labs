@@ -3,7 +3,7 @@
 # Risk
 *Meitar & Matthieu*
 
-*Data analysis, Paris, 1116*
+*Data analysis, Paris, November 16*
 
 ## Content
 - [Project Description](#project-description)
