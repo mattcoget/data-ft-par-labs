@@ -1,9 +1,9 @@
 <img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100"/>
 
-# Title of Your Project
-*[Your Name]*
+# Risk
+*Meitar & Matthieu*
 
-*[Your Cohort, Campus & Date]*
+*Data analysis, Paris, 1116*
 
 ## Content
 - [Project Description](#project-description)
