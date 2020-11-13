@@ -31,4 +31,4 @@ Include links to your repository, slides and trello/kanban board. Feel free to i
 
 [Repository](https://github.com/)  
 [Slides](https://slides.com/)  
-[Trello](https://trello.com/en)  
+[Trello](https://trello.com/b/zo1VoaqD/python-project-risk)  
