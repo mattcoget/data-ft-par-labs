@@ -1,9 +1,9 @@
 <img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100"/>
 
-# Title of Your Project
-*[Your Name]*
+# Risk
+*Meitar & Matthieu*
 
-*[Your Cohort, Campus & Date]*
+*Data analysis, Paris, November 16*
 
 ## Content
 - [Project Description](#project-description)
@@ -31,4 +31,4 @@ Include links to your repository, slides and trello/kanban board. Feel free to i
 
 [Repository](https://github.com/)  
 [Slides](https://slides.com/)  
-[Trello](https://trello.com/en)  
+[Trello](https://trello.com/b/zo1VoaqD/python-project-risk)  
