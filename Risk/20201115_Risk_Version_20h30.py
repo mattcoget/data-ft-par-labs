@@ -2,83 +2,20 @@
 #make the file exectuable 
 # --------------------------------------
 # INITIALIZE
-#import colors for background
-#from colorama import Fore
+
+from colorama import Fore
+txt_fore_clr = ["Fore.RED", "Fore.GREEN", "Fore.YELLOW", "Fore.BLUE", "Fore.MAGENTA", "Fore.CYAN"]
 
 import time
+import random
 
-all_players = [None] * 6
-
+# create the basic classes:
 class Player:
-    def __init__(self, name, soldiers):
+    def __init__(self, name, soldiers, color):
         self.name = name
         self.soldiers = soldiers
-        self.countries = []
-
-
-def play_game():
-    nb_players = phase_initialize()
-    all_players[0].countries.append(get_country(0))
-    get_country(0).owner = all_players[0]
-    print(nb_players, "players")
-    game_not_finished = True
-    while game_not_finished:
-        for p in all_players:
-            if p != None:
-                user_turn(None, p)
-                if len(p.countries) == len(all_countries):
-                    game_not_finished = False
-    #for each player launch user turn after each player played
-
-def phase_initialize():
-    #get list of players (limit: six players)
-    players_lst = ["delete me"]
-    while players_lst[-1] != "q":
-        players_lst.append(input("Please insert a player's name or ‘q’ once finished\n"))
-        if len(players_lst) > 7:
-            print("""This game is limited to 6 participents.\n
-                Let's start over.""")
-            players_lst = ["delete me"]
-    players_lst = players_lst[1:-1]
-    #print(players_lst)
-    
-    #create object names
-    players_enu = [""]
-    for i, x in enumerate(range(len(players_lst))):
-        players_enu.append("player_"+str(i))
-    players_enu = players_enu[1:]
-    nb_players = len(players_lst)
-    #print(players_enu)
-    
-    # create objects from list of object names
-    for i, x in enumerate(players_enu):
-       # print(x)
-        globals()[x] = Player(players_lst[i], init_soldiers(len(players_lst)))
-        all_players[i] = globals()[x]
-       # print(globals()[x].name)
-    #print(player_1.name)
-    #print(player_1.soldiers)
-    return nb_players
-
-# --------------------------------------
-# BOARD SETUP
-def init_soldiers(num_players):
-    """
-    If 2 are playing, see special instructions.If 3 are playing, each player counts out 35 Infantry.If 4 are playing, 
-    each player counts out 30 Infantry.
-    If 5 are playing, each player counts out 25 Infantry.If 6 are playing, each player counts out 20 Infantry.
-    """
-    if num_players == 2:
-        return(40) # notice - it's not following the O.G rules. 
-    elif num_players == 3:
-        return(35)
-    elif num_players == 4:
-        return(30)
-    elif num_players == 5:
-        return(25)
-    elif num_players == 6:
-        return(20)
-
+        self.countries = [] # connect to country
+        self.color = color
 
 class country:
     def __init__(self, name, country_number, neighbours):
@@ -89,8 +26,7 @@ class country:
         self.soldiers = 0
 
 
-#class Gameplay:
-    
+# list of country objects of class country    
 all_countries = [country("Afghanistan", 1, [36, 22, 16, 7, 37]), 
 country("Alaska", 2, [3, 27, 20]), 
 country("Alberta", 3, [2, 27, 28, 41]), 
@@ -134,12 +70,91 @@ country("Western Europe", 40, [13, 25, 26, 35]),
 country("Western United States", 41, [3, 28, 11, 6]),
 country("Yakutsk", 42, [33, 18, 20])]
 
+def play_game():
+    nb_players = phase_initialize()
+    for i, x in enumerate(all_country):
+        players_enu[i].countries.append(get_country(x))
+    print(nb_players, "players")
+    game_not_finished = True
+    while game_not_finished:
+        for p in nb_players:
+            user_turn(None, p)
+            if len(p.countries) == len(all_countries):
+                game_not_finished = False
+    #for each player launch user turn after each player played
 
-#initiation function
-#def __init__ (self):
-#    return
+# --------------------------------------
+# INITIALIZE
+def phase_initialize():
+    #get list of players (min: 2 playeres, limit: six players)
+    players_lst = ["delete me"]
+    try:
+        while players_lst[-1] != "q":
+            players_lst.append(input("Please insert a player's name or ‘q’ once finished\n"))
+            if len(players_lst) > 7:
+                print("""This game is limited to 6 participents.\n
+                    Let's start over.""")
+                players_lst = ["delete me"]
+
+    except AttributeError:
+        print("Please name at least 2 players ")
+        
+    players_lst = players_lst[1:-1]
+    
+    #create object names
+    players_enu = [""]
+    for i, x in enumerate(range(len(players_lst))):
+        players_enu.append("player_"+str(i))
+    players_enu = players_enu[1:]
+    nb_players = len(players_lst)
+    
+    # create objects from list of object names
+    for i, x in enumerate(players_enu):
+       # print(x)
+        globals()[x] = Player(players_lst[i], init_soldiers(len(players_lst)), txt_fore_clr[i])
+        players[i] = globals()[x]
+
+    # assign soldiers to countries
+    #nbr_countries_lst = list(range(len(all_countries)))
+    for i, x in enumerate(players_enu): 
+        while globals()[x].soldiers > 0:
+            random_country = random.choice(all_countries)
+            #print(str(random_country))
+            globals()[x].soldiers = globals()[x].soldiers - 1
+    # choose a random country and put a soldier there # make owner of country
+    
+    return (nb_players)
+
+def get_country(country_number):
+    return all_countries[country_number-1]
+
+
+# --------------------------------------
+# BOARD SETUP
+def init_soldiers(num_players):
+    """
+    If 2 are playing, see special instructions.If 3 are playing, each player counts out 35 Infantry.If 4 are playing, 
+    each player counts out 30 Infantry.
+    If 5 are playing, each player counts out 25 Infantry.If 6 are playing, each player counts out 20 Infantry.
+    """
+    if num_players == 2:
+        return(40) # notice - it's not following the O.G rules. 
+    elif num_players == 3:
+        return(35)
+    elif num_players == 4:
+        return(30)
+    elif num_players == 5:
+        return(25)
+    elif num_players == 6:
+        return(20)
+
+# --------------------------------------
+# GAME PLAY
     
 def user_turn(self, player):
+    tmp_clr = (player.color)
+    print(tmp_clr)
+    print(exec(tmp_clr) , "It's", player.name ,"turn!") # why doesn't it show color?
     print("It's", player.name ,"turn!")
     reinforcement(self, player)
     attack(self, player)
@@ -168,16 +183,14 @@ def reinforcement(self, player):
             
     
     #placing new soldiers
-    
     while new_soldiers > 0:
+        print("Your empire is composed by:")
         print_list_countries(player.countries)
         time.sleep(1)
         print("You have", new_soldiers, "soldiers to place.")
-        time.sleep(2)
+        time.sleep(1)
         placement = int(input('Where to you want to place them? '))
         
-        #have to add the error handling 
-        #there is a lot of cases : bad names, not your country, lower, uppercase, not complete, no space ...
         if placement not in player.countries:
             time.sleep(1)
             print("This is not one of your countries! Select one among the ones you own.")
@@ -198,13 +211,9 @@ def reinforcement(self, player):
             #add the soldiers to the country you choose
             get_country(placement).soldiers += placement_size
             new_soldiers -= placement_size
+            time.sleep(1)
             
     print("Reinforcement phase is over.")
-
-
-
-def get_country(country_number):
-    return all_countries[country_number-1]
 
 
 #Function Attacking    
@@ -222,28 +231,29 @@ def attack(self, player):
     elif choice == "y" :
         #go to the attacking process
         #input with which country attack
+        print("The list of your countries is:")
+        time.sleep(1)
         print_list_countries(player.countries)
+        time.sleep(1)
         country_attacking_number = int(input("With which you want to attack : "))
         country_attacking = get_country(country_attacking_number)
         
         
         #input which country, the player want to attack
-        #dans la liste des pays du joueur, quel est le pays choisi + quels sont ses voisions
+        print("The number of the neighbours of this country are:")
+        time.sleep(1)
         print(country_attacking.neighbours)
         country_attacked_number = int(input("In the countries below, which you want to attack: "))
         country_attacked = get_country(country_attacked_number)
         
         if country_attacked_number not in country_attacking.neighbours:
-            print("This is not a country next to your empire! Try again")
-            #print countries
-
-                    
+            time.sleep(1)
+            print("This is not a country next to your empire! Try again.")
+            
         print (country_attacking.name, "attacks", country_attacked.name, "with", country_attacking.soldiers,"against", country_attacked.soldiers,".")
-        #perhaps we can add the number of soldiers for each country
-        
-        #dices
-        import random
 
+
+        #Dices   
         offence_dice1 = random.randint(1, 6)
         offence_dice2 = random.randint(1, 6)
         offence_dice3 = random.randint(1, 6)
@@ -319,47 +329,65 @@ def attack(self, player):
         if country_attacked.soldiers == 0:
             #capturing a country
             #transfer of soldiers from attacking country to attacked country
+            time.sleep(1)
             print("You conquer", country_attacked.name, country_attacked.country_number)
+            time.sleep(1)
             print("There are", country_attacking.soldiers, "attacking soldiers left!")
             country_attacking.soldiers -= 1
             country_attacked.soldiers +=1
             country_attacked.owner = player
             
         elif country_attacking.soldiers == 1:
+            time.sleep(1)
             print("You can't attack anymore", country_attacked)
-            print("There are", country_attacked.soldiers, "defending soldiers left!")
-        
+            time.sleep(1)
+            print("There are", country_attacked.soldiers, "defending soldiers left!")    
                 
                 
     else:
         print("It's y for yes and n for no, and not", choice, "!")
-
+        pass
 
 def fortify(self, player):
     
+    print("The fortifying phase begins!")
     #print the empire and the armies
-    print_list_countries(player.countries)
-    destination = input('Where do you want to move soldiers? ')
-    if destination not in player.countries:
-        print ("This in not one of your countries! Choose among the countries below:")
-        print_list_countries(player.countries)
-    else:
-        departure = input('From which country do you want to move soldiers to', destination, "?")
-        if departure not in player.countries:
-            print("This in not one of your countries! Choose among the countries below: ")
-            print_list_countries(player.countries)
-        elif departure.soldiers == 1:
-            print("You can't divide a soldier in two, choose another country.")
+    time.sleep(1)
+    choice_fortify = input("Do you want to move your soldiers? y/n : ")
+    if choice_fortify == "n":
+        #go to the next player  
+        pass
+
+    else:    
+        destination = input('Where do you want to move soldiers? ')
+        if destination not in player.countries:
+            time.sleep(1)
+            print ("This in not one of your countries! Choose among the countries below:")
+            time.sleep(1)
             print_list_countries(player.countries)
         else:
-            moving_soldiers=input('How many soldiers?')
-            if moving_soldiers > soldiers.country_attacking:
-                print("You don't have enough soldier, you can choose max", departure.soldiers-1)
-            elif moving_soldiers == 0:
-                print("You have to choose between 1 and", departure.soldiers-1)
+            departure = input('From which country do you want to move soldiers to', destination, "?")
+            if departure not in player.countries:
+                time.sleep(1)
+                print("This in not one of your countries! Choose among the countries below: ")
+                time.sleep(1)
+                print_list_countries(player.countries)
+            elif departure.soldiers == 1:
+                time.sleep(1)
+                print("You can't divide a soldier in two, choose another country.")
+                time.sleep(1)
+                print_list_countries(player.countries)
             else:
-                departure -= moving_soldiers
-                destination += moving_soldiers
+                moving_soldiers=input('How many soldiers?')
+                if moving_soldiers > country_attacking.soldiers:
+                    time.sleep(1)
+                    print("You don't have enough soldier, you can choose max", departure.soldiers-1)
+                elif moving_soldiers == 0:
+                    time.sleep(1)
+                    print("You have to choose between 1 and", departure.soldiers-1)
+                else:
+                    departure -= moving_soldiers
+                    destination += moving_soldiers
 
 # --------------------------------------
 # GAME PLAY

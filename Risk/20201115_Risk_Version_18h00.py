@@ -170,10 +170,11 @@ def reinforcement(self, player):
     #placing new soldiers
     
     while new_soldiers > 0:
+        print("Your empire is composed by:")
         print_list_countries(player.countries)
         time.sleep(1)
         print("You have", new_soldiers, "soldiers to place.")
-        time.sleep(2)
+        time.sleep(1)
         placement = int(input('Where to you want to place them? '))
         
         #have to add the error handling 
@@ -198,6 +199,7 @@ def reinforcement(self, player):
             #add the soldiers to the country you choose
             get_country(placement).soldiers += placement_size
             new_soldiers -= placement_size
+            time.sleep(1)
             
     print("Reinforcement phase is over.")
 
@@ -222,25 +224,28 @@ def attack(self, player):
     elif choice == "y" :
         #go to the attacking process
         #input with which country attack
+        print("The list of your countries is:")
+        time.sleep(1)
         print_list_countries(player.countries)
+        time.sleep(1)
         country_attacking_number = int(input("With which you want to attack : "))
         country_attacking = get_country(country_attacking_number)
         
         
         #input which country, the player want to attack
-        #dans la liste des pays du joueur, quel est le pays choisi + quels sont ses voisions
+        print("The neighbours of this country are:")
+        time.sleep(1)
         print(country_attacking.neighbours)
         country_attacked_number = int(input("In the countries below, which you want to attack: "))
         country_attacked = get_country(country_attacked_number)
         
         if country_attacked_number not in country_attacking.neighbours:
-            print("This is not a country next to your empire! Try again")
-            #print countries
+            time.sleep(1)
+            print("This is not a country next to your empire! Try again.")
 
                     
         print (country_attacking.name, "attacks", country_attacked.name, "with", country_attacking.soldiers,"against", country_attacked.soldiers,".")
-        #perhaps we can add the number of soldiers for each country
-        
+                
         #dices
         import random
 
@@ -319,47 +324,65 @@ def attack(self, player):
         if country_attacked.soldiers == 0:
             #capturing a country
             #transfer of soldiers from attacking country to attacked country
+            time.sleep(1)
             print("You conquer", country_attacked.name, country_attacked.country_number)
+            time.sleep(1)
             print("There are", country_attacking.soldiers, "attacking soldiers left!")
             country_attacking.soldiers -= 1
             country_attacked.soldiers +=1
             country_attacked.owner = player
             
         elif country_attacking.soldiers == 1:
+            time.sleep(1)
             print("You can't attack anymore", country_attacked)
-            print("There are", country_attacked.soldiers, "defending soldiers left!")
-        
+            time.sleep(1)
+            print("There are", country_attacked.soldiers, "defending soldiers left!")    
                 
                 
     else:
         print("It's y for yes and n for no, and not", choice, "!")
-
+        pass
 
 def fortify(self, player):
     
     #print the empire and the armies
     print_list_countries(player.countries)
-    destination = input('Where do you want to move soldiers? ')
-    if destination not in player.countries:
-        print ("This in not one of your countries! Choose among the countries below:")
-        print_list_countries(player.countries)
-    else:
-        departure = input('From which country do you want to move soldiers to', destination, "?")
-        if departure not in player.countries:
-            print("This in not one of your countries! Choose among the countries below: ")
-            print_list_countries(player.countries)
-        elif departure.soldiers == 1:
-            print("You can't divide a soldier in two, choose another country.")
+    
+    choice_fortify = input("Do you want to move your soldiers? y/n : ")
+    if choice_fortify == "n":
+        #go to the next player  
+        pass
+
+    else:    
+        destination = input('Where do you want to move soldiers? ')
+        if destination not in player.countries:
+            time.sleep(1)
+            print ("This in not one of your countries! Choose among the countries below:")
+            time.sleep(1)
             print_list_countries(player.countries)
         else:
-            moving_soldiers=input('How many soldiers?')
-            if moving_soldiers > soldiers.country_attacking:
-                print("You don't have enough soldier, you can choose max", departure.soldiers-1)
-            elif moving_soldiers == 0:
-                print("You have to choose between 1 and", departure.soldiers-1)
+            departure = input('From which country do you want to move soldiers to', destination, "?")
+            if departure not in player.countries:
+                time.sleep(1)
+                print("This in not one of your countries! Choose among the countries below: ")
+                time.sleep(1)
+                print_list_countries(player.countries)
+            elif departure.soldiers == 1:
+                time.sleep(1)
+                print("You can't divide a soldier in two, choose another country.")
+                time.sleep(1)
+                print_list_countries(player.countries)
             else:
-                departure -= moving_soldiers
-                destination += moving_soldiers
+                moving_soldiers=input('How many soldiers?')
+                if moving_soldiers > soldiers.country_attacking:
+                    time.sleep(1)
+                    print("You don't have enough soldier, you can choose max", departure.soldiers-1)
+                elif moving_soldiers == 0:
+                    time.sleep(1)
+                    print("You have to choose between 1 and", departure.soldiers-1)
+                else:
+                    departure -= moving_soldiers
+                    destination += moving_soldiers
 
 # --------------------------------------
 # GAME PLAY
