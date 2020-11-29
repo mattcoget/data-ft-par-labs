@@ -27,7 +27,6 @@ from performances
 order by 3 desc
 limit 5;
 
-
 # Teams with the lowest wins percentage
 select team, year, wins, losses, wins_pct as 'Wins percentage'
 from performances
@@ -39,7 +38,7 @@ select team, year, wins, losses, wins_pct as 'Wins percentage', playoffs
 from performances
 where playoffs not in ('Won Finals')
 order by 3 desc
-limit 5;
+limit 10;
 
 # Teams with the lowest wins percentage and win the title 
 select team, year, wins, losses, wins_pct as 'Wins percentage', playoffs
@@ -48,7 +47,7 @@ where playoffs ='Won Finals'
 order by 5
 limit 5;
 
-# Stats
+# Overview of stats
 select *
 from stats;
 
@@ -60,23 +59,11 @@ on stats.team = performances.team and stats.year = performances.year
 order by 3 desc
 limit 10;
 
-# Most skilled teams
+# Teams with the best field goal percentage
 select team, year, points, field_goal, fg_pct
 from stats
 order by 5 desc
 limit 10;
-
-# Less skilled teams
-select team, year, points, field_goal, fg_pct
-from stats
-order by 5
-limit 10;
-
-# Pace of champions
-select distinct team, year, pace
-from performances
-where playoffs = 'Won Finals'
-order by 3 ;
 
 # Champions, offensive rating and defensive rating
 SELECT 
@@ -84,7 +71,7 @@ SELECT
     year,
     offensive_rating,
     defensive_rating,
-    ROUND((offensive_rating / defensive_rating), 2) AS 'offense/defense'
+    ROUND((offensive_rating - defensive_rating), 2) AS 'offense/defense'
 FROM
     performances
 WHERE
