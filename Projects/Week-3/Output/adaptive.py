@@ -4,7 +4,7 @@ from IPython.display import Markdown, display
 import warnings
 
 warnings.filterwarnings('ignore')
-timeout_glob=0.05
+timeout_glob=0.2
 verify_glob=True
 allow_glob=True
 def printmd(string):
@@ -23,7 +23,7 @@ def status_handler(status):
     status - status code, integer
     """
     if status<300:
-        print('Alles gute!')
+        print('Everything is okay!')
     elif 400<=status<500:
         print('request has failed due to your mistake. Think about it. ')
     else:

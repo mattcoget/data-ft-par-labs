@@ -1,4 +1,4 @@
-Team,Year,Wins,Losses,Wins percentage,SRS,Pace,Offensive Rating,Defensive Rating,Playoffs
+team,year,wins,losses,wins_pct,srs,pace,offensive_rating,defensive_rating,playoffs
 Atlanta Hawks,2019-20,20,47,0.299,-7.71,103.0,107.2,114.8,No playoffs
 Atlanta Hawks,2018-19,29,53,0.354,-6.06,103.9,108.1,113.9,No playoffs
 Atlanta Hawks,2017-18,24,58,0.293,-5.3,98.3,105.0,110.6,No playoffs

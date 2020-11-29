@@ -1,4 +1,4 @@
-Team,Year,Points,Field Goal,FG percentage,Rebounds,Assists,Steals,Blocks,Turnovers
+team,year,points,field_goal,fg_pct,rebounds,assists,steals,blocks,turnovers
 Atlanta Hawks,2019-20,7488,2723,0.449,2898.0,1605,523.0,2898.0,1086.0
 Atlanta Hawks,2018-19,9294,3392,0.451,3780.0,2118,675.0,3780.0,1397.0
 Atlanta Hawks,2017-18,8475,3130,0.446,3436.0,1946,638.0,3436.0,1276.0
