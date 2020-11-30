@@ -36,7 +36,7 @@ The technical requirements for this project are as follows:
 
 * You must obtain data website or webapp.
 * You must clean and normalize your database.
-* You must have at least 200 rows and 8 columns 9in the final clean database. More data is always welcome.
+* You must have at least 200 rows and 8 columns in the final clean database. More data is always welcome.
 * The result should be stored in CSV format and sql format. 
 * Your code should be saved in a Jupyter Notebook and your results should be saved in a folder named output.
 * You should include a README.md file that describes the steps you took and your thought process for obtaining data from the API and web page.
