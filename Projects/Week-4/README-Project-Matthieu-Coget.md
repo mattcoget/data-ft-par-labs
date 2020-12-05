@@ -24,7 +24,7 @@ At first, the challenge was to select a dataset already created with the objecti
 
 The point was to clean the dataset in a way it will be useful in a way to show the number of victims (killed and wounded), which are the most attacked countries by terrorists, evolution during time and if there is a clear evolution between decades and even if there is a tipping point during this period.
 
-For that, the number of columns has been reduced to 45, even if some of them can have been dropped. Some of the columns contain only 1% of non-null datas.
+For that, the number of columns has been reduced to 24, even if some of them can have been dropped. Some of the columns contain only 1% of non-null datas.
 
 ### Code Approach
 
