@@ -4,7 +4,7 @@
 
 
 ## Content
-- [Presentation of the project](https://docs.google.com/presentation/d/1Ai-mZfTvXBwPrxQzoZmWBExR1j0E8oJikONONBjCgnA/)
+- [Presentation of the project](https://docs.google.com/presentation/d/11OtFWW1JUAentn3B83st3I3TrZj4lgGIo0oNTr2764c/edit?usp=sharing)
 - [Project Description](#project-description)
 - [Datas Approach](#datas-approach)
 - [Code Approach](#code-approach)
@@ -56,6 +56,6 @@ So it was decided to use the Geopandas library to create the different maps.
 
 
 ## Files
-* [Presentation of the project]()
-* [Jupyter Notebook with the code]()
-* [Data Folder]()
+* [Presentation of the project](https://docs.google.com/presentation/d/1Ai-mZfTvXBwPrxQzoZmWBExR1j0E8oJikONONBjCgnA/)
+* [Jupyter Notebook with the code](https://github.com/mattcoget/data-ft-par-labs/blob/main/Projects/Week-4/Terrorism%20attacks%20in%20the%20world%20since%201970.ipynb)
+* [Data Folder](https://github.com/mattcoget/data-ft-par-labs/blob/main/Projects/Week-4/cleaned_dataset.csv)
